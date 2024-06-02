@@ -9,7 +9,7 @@
 .editor__menu-bar {
   grid-row: 1 / 2;
   grid-column: 1 / 4;
-  padding: 2px 8px;
+  padding: 2px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
