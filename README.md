@@ -6,4 +6,3 @@ Realised by Abdisalomov Abdisalomov, Tashkent university of information technolo
 
 
 - [Website demo](https://image-processing-brown.vercel.app/)
-<!-- ✨ Hosting– [editor.kiver.net](http://editor.kiver.net/) (address subject to change). ✨ -->

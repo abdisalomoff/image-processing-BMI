@@ -51,7 +51,7 @@ const Editor = () => {
   const [handStep, setHandStep] = useState(10);
   const [showBg, setShowBg] = useState(false);
 
-  // Работа с модальны окном
+  // Modal oyna bilan ishlash
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalCurvesOpen, setIsModalCurvesOpen] = useState(false);
   const [isModalFilterOpen, setIsModalFilterOpen] = useState(false);
@@ -148,7 +148,7 @@ const Editor = () => {
 
         if (isCtrlPressed || isTwoFingerScroll) {
           const delta = event.deltaY;
-          const newScaleFactor = scaleFactor + delta * 0.001; // Множитель для изменения скорости масштабирования
+          const newScaleFactor = scaleFactor + delta * 0.001; // Masshtabni o'zgartirish tezligini ko'paytirish uchun ko'paytiruvchi
           setScaleFactor(Math.min(Math.max(0.1, newScaleFactor), 300));
         }
       };
@@ -207,7 +207,7 @@ const Editor = () => {
     setImage(image);
   };
 
-  // Рука
+  // qo'l
 
   useEffect(() => {
     const handleKeyDownEvent = (e) =>
@@ -229,12 +229,12 @@ const Editor = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Обновляем если курсор находится в пределах canvas
+    // Agar kursor canvas ichida bo'lsa, yangilanadi
     if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
       setCursor({ x, y });
     }
 
-    // Перетаскивание изображения
+    // Rasmni tortib ko'chirish
     if (isDragging && toolActive === "hand") {
       const dx = e.clientX - rect.left - cursor.x;
       const dy = e.clientY - rect.top - cursor.y;
@@ -318,20 +318,20 @@ const Editor = () => {
     <section className="editor">
       <div className="editor__menu-bar menu-bar">
         <div className="menu-bar__actions">
-          <ButtonIcon link="/">Главная</ButtonIcon>
+          <ButtonIcon link="/">Bosh menyu</ButtonIcon>
           {image && (
             <>
               <ButtonIcon title="Скачать" onClick={handleDownload}>
-                Скачать
+                Yuklab olish
               </ButtonIcon>
               <ButtonIcon title="Масштабирование" onClick={openModal}>
-                Масштабировать
+                Masshtablash
               </ButtonIcon>
               <ButtonIcon title="Кривые" onClick={openCurvesModal}>
-                Кривые
+                Gistogramma
               </ButtonIcon>
               <ButtonIcon title="Фильтрация" onClick={openFilterModal}>
-                Фильтрация
+                Filtrlash
               </ButtonIcon>
             </>
           )}
@@ -340,18 +340,18 @@ const Editor = () => {
           <div className="menu-bar__regulators">
             {toolActive === "hand" && (
               <div className="menu-bar__speed">
-                <p className="menu-bar__desc">Скорость перемещения</p>
+                <p className="menu-bar__desc">Harakatlanish tezligi</p>
                 <Input
                   w100
                   type="number"
                   value={handStep}
                   onChange={setHandStep}
-                  placeholder="Скорость перемещения стрелками"
+                  placeholder="Kursor harakatlanish tezligi"
                 />
               </div>
             )}
             <div className="menu-bar__size">
-              <p className="menu-bar__desc">Масштабирование изображения в %</p>
+              <p className="menu-bar__desc">Tasvir masshtabini % da</p>
               {selectOption && (
                 <Dropdown
                   selectOption={selectOption}
@@ -365,12 +365,12 @@ const Editor = () => {
       </div>
       <div className="editor__tool-panel tool-panel">
         <ButtonIcon
-          title="Курсор"
+          title="Kursor"
           onClick={() => {
             setToolActive("cursor");
           }}
           active={toolActive === "cursor"}
-          tooltip="Обычный указатель для работы с объектами и сброса других инструментов."
+          tooltip="Ob'ektlar bilan ishlash va boshqa vositalarni tiklash uchun oddiy ko'rsatgich."
         >
           <svg
             className="tool-panel__icon"
@@ -396,7 +396,7 @@ const Editor = () => {
             setToolActive("pipette");
           }}
           active={toolActive === "pipette"}
-          tooltip="Инструмент пипетки позволяет выбирать цвета изображения. Просто кликните на пиксель изображения, чтобы получить его цвет. Полезно при работе с цветовой палитрой и выборе соответствующих оттенков."
+          tooltip="Pipetka vositasi tasvirdagi ranglarni tanlash imkonini beradi. Rangini olish uchun rasmdagi piksel ustiga bosing. Ranglar palitrasi bilan ishlashda va tegishli soyalarni tanlashda foydalidir."
         >
           <svg
             className="tool-panel__icon"
@@ -422,7 +422,7 @@ const Editor = () => {
             setToolActive("hand");
           }}
           active={toolActive === "hand"}
-          tooltip="Инструмент для перемещения области просмотра изображения. Просто зажмите кнопку мыши и перетащите, чтобы передвинуть изображение по рабочей области. Удобно для работы с большими изображениями и обзором деталей."
+          tooltip="Tasvirni ko'rish maydonini ko'chirish uchun vosita. Tasvirni ish maydoni bo'ylab siljitish uchun shunchaki sichqoncha tugmasini bosib ushlab turing va torting. Katta tasvirlar bilan ishlash va tafsilotlarni ko'rish uchun qulay."
         >
           <svg
             className="tool-panel__icon"
@@ -440,7 +440,7 @@ const Editor = () => {
       </div>
       <div className="editor__info-panel info-panel">
         <ButtonIcon
-          title="Информация"
+          title="Ma'lumot"
           onClick={() => {
             setInfoActive(!infoActive);
             !infoActive ? openContextModal() : closeContextModal();
@@ -467,7 +467,7 @@ const Editor = () => {
       <ContextModal
         isOpen={isContextModalOpen || toolActive === "pipette"}
         onClose={closeContextModal}
-        title="Информация"
+        title="Ma'lumot"
       >
         <div className="editor__all-colors">
           <div className="editor__info-color">
@@ -476,7 +476,7 @@ const Editor = () => {
             <p className="status-bar__text">
               <span
                 className="tooltip"
-                data-tooltip="RGB (красный, зелёный, синий) представляет собой аддитивную цветовую модель, где каждый пиксель определяется комбинацией красного, зелёного и синего цветов. Оси представляют отдельные каналы: красный (R), зелёный (G) и синий (B), каждый из которых имеет диапазон значений от 0 до 255."
+                data-tooltip="RGB (кirmizi, yashil, ko'k) qo'shimcha ranglar modelini ifodalaydi, har bir pikselni qizil, yashil va ko'k ranglarining kombinatsiyasi belgilayadi. Osiyalar alohida kanallarni ifodalaydi: kirmizi (R), yashil (G) va ko'k (B), ularning har biri 0 dan 255 gacha bo'lgan qiymatlar diapazoniga ega."
               >
                 &#9432;
               </span>
@@ -485,7 +485,7 @@ const Editor = () => {
             <p className="status-bar__text">
               <span
                 className="tooltip"
-                data-tooltip="XYZ является абсолютной моделью цвета и используется для описания цвета независимо от устройства. Оси этого пространства представляют три компоненты: X, Y и Z, которые характеризуют цвет в терминах его яркости, а также красной и зелёной составляющих. Диапазон значений зависит от конкретной реализации, обычно X и Y находятся в диапазоне от 0 до 1, а Z — от 0 до 1."
+                data-tooltip="XYZ absolut rang modelini ifodalaydi va qurilma qurilmalariga qarashsiz rangni tasvirlash uchun ishlatiladi. Ushbu doiraning o'shishlari uchta komponentni ifodalaydi: X, Y va Z, ularga rangni, uni kengligi, qizil va yashil tarkibini tushuntiradi. Qiymatlar diapazoni ma'lum bir qurilma asosida o'zgaradi, odatda X va Y 0 dan 1 gacha, Z esa 0 dan 1 gacha bo'lgan cheklangan diapazonda joylashadi."
               >
                 &#9432;
               </span>
@@ -494,7 +494,7 @@ const Editor = () => {
             <p className="status-bar__text">
               <span
                 className="tooltip"
-                data-tooltip=" Lab представляет собой цветовую модель, основанную на восприятии цвета человеческим глазом. Оси этого пространства включают L (яркость), a (цвет от зелёного до красного) и b (цвет от синего до жёлтого). Значения L находятся в диапазоне от 0 до 100, а значения a и b — от -128 до 127."
+                data-tooltip=" Laboratoriya - bu rangni inson ko'zi bilan idrok etishga asoslangan rang modeli. Ushbu bo'shliqning o'qlari L (yorqinlik), a (yashildan qizil ranggacha) va b (rang ko'kdan sariq ranggacha) o'z ichiga oladi. L qiymatlari 0 dan 100 gacha, a va b qiymatlari esa -128 dan 127 gacha."
               >
                 &#9432;
               </span>
@@ -503,7 +503,7 @@ const Editor = () => {
             <p className="status-bar__text">xy</p>
           </div>
           <div className="editor__info-color">
-            <p className="status-bar__text">Цвет #1:&nbsp;</p>
+            <p className="status-bar__text">Color #1:&nbsp;</p>
             <div
               className="status-bar__color"
               style={{ backgroundColor: pipetteColor1 }}
@@ -521,7 +521,7 @@ const Editor = () => {
             </p>
           </div>
           <div className="editor__info-color">
-            <p className="status-bar__text">Цвет #2 (alt или option):&nbsp;</p>
+            <p className="status-bar__text">Color #2 (alt yoki option):&nbsp;</p>
             <div
               className="status-bar__color"
               style={{ backgroundColor: pipetteColor2 }}
@@ -539,7 +539,7 @@ const Editor = () => {
             </p>
           </div>
           <p className="editor__contrast-info">
-            Контраст{" "}
+            Kontrast{" "}
             {pipetteColor1 &&
               pipetteColor2 &&
               calculateContrast(
@@ -582,14 +582,14 @@ const Editor = () => {
         {image && (
           <>
             <span className="status-bar__text">
-              Разрешение: {Math.round(width)}&nbsp;x&nbsp;{Math.round(height)}
+              O'lchamlari: {Math.round(width)}&nbsp;x&nbsp;{Math.round(height)}
               &nbsp;px
             </span>
             <span className="status-bar__text">
-              Размер файла: {fileSize}&nbsp;Кб
+              Fayl hajmi: {fileSize}&nbsp;Кб
             </span>
             <span className="status-bar__text">
-              Координаты: x&nbsp;{cursor.x}; y&nbsp;{cursor.y}
+              Kordinatalari: x&nbsp;{cursor.x}; y&nbsp;{cursor.y}
             </span>
           </>
         )}
@@ -597,7 +597,7 @@ const Editor = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title="Масштабирование изображения"
+        title="Tasvirni masshtablash"
       >
         <ScalingModal
           image={imageObj}
@@ -610,7 +610,7 @@ const Editor = () => {
         bg0={showBg}
         isOpen={isModalCurvesOpen}
         onClose={closeModal}
-        title="Кривые изображения"
+        title="Tasvir gistogrammasi"
       >
         {isModalCurvesOpen && (
           <CurvesModal
@@ -625,7 +625,7 @@ const Editor = () => {
         bg0={showBg}
         isOpen={isModalFilterOpen}
         onClose={closeModal}
-        title="Фильтрация изображения"
+        title="Tasvirni filtrlash"
       >
         {isModalFilterOpen && (
           <FilterModal

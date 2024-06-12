@@ -65,7 +65,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
     const width = 500 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
 
-    // Очистка SVG
+    // SVG-ni tozalang
     d3.select("#histogram").selectAll("*").remove();
 
     const svg = d3
@@ -82,15 +82,15 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
     const color = d3
       .scaleOrdinal()
       .domain(["dataR", "dataG", "dataB"])
-      .range(["red", "green", "blue"]); // Здесь вы можете выбрать любые цвета для каждого массива данных
+      .range(["red", "green", "blue"]); // Bu yerda har bir maʼlumotlar massivi uchun istalgan rangni tanlashingiz mumkin
 
-    // Построение линий для цветов RGB с использованием кривой Безье
+    // Bezier egri chizig'idan foydalanib, RGB ranglari uchun chiziqlar chizish
     svg
       .append("path")
       .datum(dataR)
       .attr("class", "line")
       .style("stroke", color("dataR"))
-      .style("fill", "none") // Устанавливаем прозрачный цвет заливки
+      .style("fill", "none")// To'ldirish rangini shaffof qilib o'rnating
       .attr(
         "d",
         d3
@@ -98,7 +98,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
           .x((d, i) => x(i))
           .y((d) => y(d))
           .curve(d3.curveBasis)
-      ); // Используем кривую Безье для плавных линий
+      ); // Silliq chiziqlar uchun Bezier egri chizig'idan foydalaning
 
     svg
       .append("path")
@@ -134,12 +134,11 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
       .append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickValues(d3.range(0, 256, 15))); // Добавляем деления по оси X
-
+      .call(d3.axisBottom(x).tickValues(d3.range(0, 256, 15)));// X o'qi bo'ylab bo'linmalar qo'shing
     svg
       .append("g")
       .attr("class", "y axis")
-      .call(d3.axisLeft(y).tickValues(d3.range(0, 256, 15))); // Добавляем деления по оси Y
+      .call(d3.axisLeft(y).tickValues(d3.range(0, 256, 15))); // X o'qi bo'ylab bo'linmalar qo'shing
 
     svg
       .selectAll(".pointA")
@@ -241,7 +240,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
       .attr("x", 0 - height / 2)
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Выход") // Текст оси Y
+      .text("Chiqish") // Текст оси Y
       .style("fill", "currentColor");
 
     svg
@@ -251,7 +250,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
         "translate(" + width / 2 + " ," + (height + margin.top + 20) + ")"
       )
       .style("text-anchor", "middle")
-      .text("Вход") // Текст оси X
+      .text("Kirish") // Текст оси X
       .style("fill", "currentColor");
 
     svg
@@ -261,7 +260,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
       .attr("text-anchor", "middle")
       .style("font-size", "12px")
       .style("font-weight", "600")
-      .text("RGB Гистограмма")
+      .text("RGB Gistogramma")
       .style("fill", "currentColor");
   };
 
@@ -367,7 +366,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
         <div className="curves-modal__table">
           <h3 className="curves-modal__name curves-modal__name--a">A</h3>
           <h3 className="curves-modal__name curves-modal__name--b">B</h3>
-          <p className="curves-modal__type">Вход</p>
+          <p className="curves-modal__type">Kirish</p>
           <Input
             type="number"
             max={Number(inB) - 1}
@@ -382,7 +381,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
             value={inB}
             onChange={setInB}
           />
-          <p className="curves-modal__type">Выход</p>
+          <p className="curves-modal__type">Chiqish</p>
           <Input
             type="number"
             max={255}
@@ -399,7 +398,7 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
           />
         </div>
         <div className="curves-modal__settings">
-          <label htmlFor="previewCheckbox">Предварительный просмотр</label>
+          <label htmlFor="previewCheckbox">Ko‘rib chiqish</label>
           <Input
             type="checkbox"
             name="previewCheckbox"
@@ -423,14 +422,14 @@ const CurvesModal = ({ imageCtx, closeModal, showPreview }) => {
           shadow
           onClick={handleCurvesReset}
         >
-          Сбросить
+          Qayta o'rnatish
         </TheButton>
         <TheButton
           className="curves-modal__button"
           accent={true}
           onClick={handleCurvesConfirm}
         >
-          Применить
+          Amalga oshirish
         </TheButton>
       </div>
     </form>

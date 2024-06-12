@@ -19,7 +19,7 @@ const FilterModal = ({ imageCtx, closeModal, showPreview }) => {
   const modes = [
     {
       value: "identical",
-      name: "Тождественное отображение",
+      name: "identik tasvirlash(idenfikatsiyalash)",
       matrix: [
         [0, 0, 0],
         [0, 1, 0],
@@ -29,7 +29,7 @@ const FilterModal = ({ imageCtx, closeModal, showPreview }) => {
 
     {
       value: "sharpening",
-      name: "Повышение резкости",
+      name: "Aniqlikni oshirish(o'tkirlash)",
       matrix: [
         [0, -1, 0],
         [-1, 5, -1],
@@ -38,7 +38,7 @@ const FilterModal = ({ imageCtx, closeModal, showPreview }) => {
     },
     {
       value: "gauss",
-      name: "Фильтр Гаусса",
+      name: "Gaus filtri",
       matrix: [
         [1, 2, 1],
         [2, 4, 2],
@@ -47,7 +47,7 @@ const FilterModal = ({ imageCtx, closeModal, showPreview }) => {
     },
     {
       value: "rectangular",
-      name: "Прямоугольное размытие",
+      name: "Burchaklarni xiralashtirish",
       matrix: [
         [1, 1, 1],
         [1, 1, 1],
@@ -213,7 +213,7 @@ const FilterModal = ({ imageCtx, closeModal, showPreview }) => {
         ))}
       </fieldset>
       <div className="filter-modal__settings">
-        <label htmlFor="previewCheckbox">Предварительный просмотр</label>
+        <label htmlFor="previewCheckbox">Oldindan ko'rish</label>
         <Input
           type="checkbox"
           name="previewCheckbox"
@@ -236,14 +236,14 @@ const FilterModal = ({ imageCtx, closeModal, showPreview }) => {
           shadow
           onClick={() => setMode("identical")}
         >
-          Сбросить
+          Tiklash
         </TheButton>
         <TheButton
           className="filter-modal__button"
           accent={true}
           onClick={() => handleSubmit()}
         >
-          Применить
+          Qo'llash
         </TheButton>
       </div>
     </form>

@@ -80,7 +80,6 @@ export const handleKeyUp = (toolActive, canvasTranslation, setCanvasTranslation,
             case "ArrowRight":
             case "ArrowUp":
             case "ArrowDown":
-                // Остановить перемещение при отпускании клавиши
                 setCanvasTranslation({
                     x: canvasTranslation.x,
                     y: canvasTranslation.y

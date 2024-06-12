@@ -79,7 +79,7 @@ const Modal = ({ isOpen, onClose, title, children, className, w80, bg0 }) => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
           >
-            <p className="drag-shape__label visually-hidden">Перетаскивание модального окна</p>
+            <p className="drag-shape__label visually-hidden">Modal oynani torting</p>
           </button>
           <h2 className='modal__title'>{title}</h2>
           <button className="modal__close" onClick={onClose}>&#x2715;</button>
